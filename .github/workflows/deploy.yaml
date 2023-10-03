@@ -1,0 +1,16 @@
+name: Deploy Dummy React App
+on:
+  push:
+    branches:
+      - main
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build Client
+        run: docker build -t brownninja1994/dummy-react-app .
+      - name: Run Client Unit Tests
+        run: docker run -e CI=true brownninja1994/dummy-react-app npm run test
